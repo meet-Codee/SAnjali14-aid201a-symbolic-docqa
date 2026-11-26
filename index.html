@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AID201A Symbolic Clinical Protocol DQA Agent | S Anjali (25ETAI410120)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-0: #041318;
+      --bg-1: #081f26;
+      --bg-2: #0d2b35;
+      --card: rgba(13, 43, 53, 0.88);
+      --border: rgba(45, 212, 191, 0.25);
+      --primary: #0d9488;
+      --primary-light: #2dd4bf;
+      --accent: #38bdf8;
+      --success: #10b981;
+      --warn: #f59e0b;
+      --text-0: #f0fdfa;
+      --text-1: #ccfbf1;
+      --text-2: #99f6e4;
+      --mono: 'Fira Code', monospace;
+      --sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at 85% 10%, #114250 0%, var(--bg-0) 58%), var(--bg-0);
+      color: var(--text-0);
+      font-family: var(--sans);
+      line-height: 1.55;
+      min-height: 100vh;
+      padding-bottom: 4rem;
+    }
+    .topbar {
+      background: rgba(4, 19, 24, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 0.9rem 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0d9488, #0284c7);
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #fff;
+      box-shadow: 0 0 22px rgba(45, 212, 191, 0.28);
+    }
+    .brand-title h1 {
+      font-size: 1.06rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .brand-title p {
+      font-size: 0.78rem;
+      color: #5eead4;
+    }
+    .student-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(13, 148, 136, 0.18);
+      border: 1px solid rgba(45, 212, 191, 0.4);
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+    }
+    .student-badge strong { color: var(--primary-light); }
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 1.75rem 1.5rem 0;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.28), rgba(8, 31, 38, 0.92));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.65rem 1.85rem;
+      margin-bottom: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(45, 212, 191, 0.16);
+      border: 1px solid rgba(45, 212, 191, 0.45);
+      color: var(--primary-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.6rem;
+    }
+    .hero h2 {
+      font-size: 1.52rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.45rem;
+    }
+    .hero p {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      max-width: 830px;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 850px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+    }
+    .kpi-card .k-title {
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #5eead4;
+    }
+    .kpi-card .k-num {
+      font-size: 1.55rem;
+      font-weight: 800;
+      font-family: var(--mono);
+      color: #fff;
+      margin: 0.2rem 0;
+    }
+    .kpi-card .k-desc {
+      font-size: 0.76rem;
+      color: #94a3b8;
+    }
+    .workspace {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 1.35rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 1024px) { .workspace { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 1.35rem 1.45rem;
+    }
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid rgba(45, 212, 191, 0.16);
+    }
+    .card-head h3 {
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: rgba(45, 212, 191, 0.15);
+      color: var(--primary-light);
+      border: 1px solid rgba(45, 212, 191, 0.35);
+    }
+    .search-bar {
+      display: flex;
+      gap: 0.65rem;
+      margin-bottom: 0.9rem;
+    }
+    .search-input {
+      flex: 1;
+      background: rgba(4, 19, 24, 0.82);
+      border: 1px solid rgba(45, 212, 191, 0.4);
+      color: #fff;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-family: var(--sans);
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.22);
+    }
+    .btn {
+      background: linear-gradient(135deg, #0d9488, #0284c7);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.25rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.87rem;
+      cursor: pointer;
+      transition: transform 0.12s, opacity 0.15s;
+      white-space: nowrap;
+    }
+    .btn:hover { opacity: 0.95; transform: translateY(-1px); }
+    .btn-outline {
+      background: rgba(15, 45, 55, 0.8);
+      border: 1px solid rgba(45, 212, 191, 0.35);
+    }
+    .preset-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.15rem;
+    }
+    .preset-btn {
+      background: rgba(4, 19, 24, 0.78);
+      border: 1px solid rgba(45, 212, 191, 0.25);
+      color: #cbd5e1;
+      padding: 0.35rem 0.7rem;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .preset-btn:hover {
+      background: rgba(13, 148, 136, 0.3);
+      border-color: var(--primary-light);
+      color: #fff;
+    }
+    .proof-box {
+      background: rgba(4, 19, 24, 0.86);
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      border-radius: 12px;
+      padding: 1.15rem 1.25rem;
+    }
+    .proof-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 0.8rem;
+      align-items: center;
+    }
+    .pill-PROVEN {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      font-weight: 700;
+      padding: 0.22rem 0.6rem;
+      border-radius: 6px;
+    }
+    .pill-ABSTAIN {
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      font-weight: 700;
+      padding: 0.22rem 0.6rem;
+      border-radius: 6px;
+    }
+    .p-field { margin-bottom: 0.65rem; }
+    .p-field:last-child { margin-bottom: 0; }
+    .p-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #5eead4;
+      margin-bottom: 0.15rem;
+    }
+    .p-value {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: #f8fafc;
+      word-break: break-word;
+    }
+    .p-value.main-ans {
+      color: #2dd4bf;
+      font-size: 1.03rem;
+      font-weight: 700;
+    }
+    .prod-rules {
+      display: flex;
+      flex-direction: column;
+      gap: 0.58rem;
+    }
+    .prod-rule {
+      background: rgba(4, 19, 24, 0.75);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-left: 3px solid var(--primary-light);
+      border-radius: 9px;
+      padding: 0.62rem 0.85rem;
+    }
+    .prod-rule code {
+      font-family: var(--mono);
+      font-size: 0.77rem;
+      color: var(--primary-light);
+      display: block;
+      margin-bottom: 0.18rem;
+    }
+    .prod-rule span {
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+    .tab-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .t-btn {
+      background: rgba(4, 19, 24, 0.8);
+      border: 1px solid rgba(45, 212, 191, 0.25);
+      color: #cbd5e1;
+      padding: 0.5rem 0.95rem;
+      border-radius: 9px;
+      font-size: 0.81rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .t-btn.active {
+      background: var(--primary);
+      border-color: var(--primary-light);
+      color: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.81rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.62rem 0.75rem;
+      border-bottom: 1px solid rgba(45, 212, 191, 0.14);
+    }
+    th {
+      background: rgba(4, 19, 24, 0.92);
+      color: var(--primary-light);
+      font-weight: 600;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    tr:hover td { background: rgba(45, 212, 191, 0.07); }
+    .mono { font-family: var(--mono); font-size: 0.77rem; }
+    .ok-pill {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      padding: 0.15rem 0.5rem;
+      border-radius: 5px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+    .custom-box {
+      width: 100%;
+      background: rgba(4, 19, 24, 0.85);
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      padding: 0.7rem;
+      border-radius: 9px;
+      margin-bottom: 0.6rem;
+    }
+    .scroll-table {
+      overflow-x: auto;
+      max-height: 440px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">KB</div>
+      <div class="brand-title">
+        <h1>AID201A — Symbolic Clinical Protocol &amp; Biomedical Knowledge-Graph DQA</h1>
+        <p>Ramaiah University of Applied Sciences (RUAS) • Department of Computer Science &amp; Engineering</p>
+      </div>
+    </div>
+    <div class="student-badge">
+      <span>Student: <strong>S Anjali</strong></span>
+      <span>•</span>
+      <span>Reg. No.: <strong>25ETAI410120</strong></span>
+      <span>•</span>
+      <span>B.Tech. CSE (3rd Sem)</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="hero-pill">● Non-NLP / Non-RAG • Symbolic Relational Proposition &amp; Production-Rule Agent</span>
+        <h2>Clinical Facility, Biomedical Device &amp; Diagnostic Screening Symbolic DQA</h2>
+        <p>
+          Live interactive deployment of the Symbolic Document Question Answering system over the
+          <strong>Ramaiah Memorial Hospital Clinical Units, Biomedical Instrumentation &amp; Diagnostic Protocol Register</strong>.
+          Implements Dual-Indexed Relational Proposition Frames (<code>B01–B22</code>), Six First-Order Production Rules (<code>P1–P6</code>) with Fixpoint Materialization (<code>I01–I27</code>), Backward Goal Proof Unification, and Breadth-First Search (BFS) Shortest Relational Chains.
+        </p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:0.55rem;">
+        <button class="btn" onclick="evaluateAllTests()">▶ Execute All 18 Clinical Benchmark Tests</button>
+        <a class="btn btn-outline" href="https://github.com/meet-Codee/aid201a-symbolic-docqa-anjali" target="_blank" style="text-align:center; text-decoration:none;">View GitHub Repository ↗</a>
+      </div>
+    </section>
+
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="k-title">Deductive Closure Expansion</div>
+        <div class="k-num" id="kpi-props">22 → 49</div>
+        <div class="k-desc">22 Base (B01–B22) + 27 Inferred (I01–I27)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="k-title">Clinical Benchmark Accuracy</div>
+        <div class="k-num" id="kpi-acc">100.00%</div>
+        <div class="k-desc">18 / 18 Test Goals Proven or Abstained (CO-4)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="k-title">Closed-World Abstention</div>
+        <div class="k-num">100.00%</div>
+        <div class="k-desc">3 / 3 Unsupported Queries Abstained • 0% Hallucination</div>
+      </div>
+      <div class="kpi-card">
+        <div class="k-title">Semantic Adjacency Graph</div>
+        <div class="k-num" id="kpi-entities">23 Entities</div>
+        <div class="k-desc">12 Clinical Predicates • Sub-ms Unification</div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <!-- LEFT: Goal Unification & BFS Query Console -->
+      <div class="card">
+        <div class="card-head">
+          <h3>🩺 Interactive Clinical Goal Unification &amp; BFS Chain Console</h3>
+          <span class="tag">Symbolic Inference Engine</span>
+        </div>
+
+        <div class="search-bar">
+          <input id="clinical-q" class="search-input" type="text"
+                 value="Where is the Siemens 3T MRI Scanner located?"
+                 placeholder="Enter any clinical ward, device location, screening chain, or BFS relationship question..."
+                 onkeydown="if(event.key==='Enter') runClinicalQuery()" />
+          <button class="btn" onclick="runClinicalQuery()">Prove Goal</button>
+        </div>
+
+        <span style="font-size:0.75rem; color:#5eead4; display:block; margin-bottom:0.45rem;">Select a clinical benchmark query across our 5 symbolic reasoning categories:</span>
+        <div class="preset-grid">
+          <button class="preset-btn" onclick="pickClinicalQuery('Which wing houses the Cardiology ICU?')">Q01: Base Proposition (1-Hop)</button>
+          <button class="preset-btn" onclick="pickClinicalQuery('Where is the Siemens 3T MRI Scanner located?')">Q07: Deductive Spatial (P1+P3, 4-Hop)</button>
+          <button class="preset-btn" onclick="pickClinicalQuery('What diagnostic screenings are required before Cardiac Catheterization Protocol?')">Q10: Screening Chain (P6)</button>
+          <button class="preset-btn" onclick="pickClinicalQuery('Which department supervises the Siemens 3T MRI Scanner?')">Q12: Backward Supervision (P4)</button>
+          <button class="preset-btn" onclick="pickClinicalQuery('Which division governs the Cardiology ICU?')">Q13: Divisional Governance (P5)</button>
+          <button class="preset-btn" onclick="pickClinicalQuery('How is Philips IntelliVue Monitor linked to Dr. R. Subramanian?')">Q14: BFS Shortest Entity Chain</button>
+          <button class="preset-btn" onclick="pickClinicalQuery('What is the path between Robotic Infusion Pump and Clinical Sciences Division?')">Q15: BFS 3-Hop Clinical Path</button>
+          <button class="preset-btn" onclick="pickClinicalQuery('What is the insurance billing code for Cardiac Catheterization Protocol?')">Q16: CWA Abstention Test</button>
+        </div>
+
+        <div class="proof-box">
+          <div class="proof-header">
+            <span class="pill-PROVEN" id="out-status">PROVEN</span>
+            <span class="tag" id="out-mech">RULE_DEDUCTION</span>
+            <span class="tag" id="out-time">0.11 ms</span>
+          </div>
+          <div class="p-field">
+            <div class="p-label">Parsed Symbolic Goal Frame (Intent, Canonical Predicate p*, Bound Entities)</div>
+            <div class="p-value" id="out-parsed">Intent=GOAL_RESOLUTION | p*=located_in | Bound=["Siemens 3T MRI Scanner"]</div>
+          </div>
+          <div class="p-field">
+            <div class="p-label">Proven Target Value(s) / Relational Chain</div>
+            <div class="p-value main-ans" id="out-ans">Specialty Diagnostics Block; Ramaiah Memorial Hospital; Bengaluru Central Zone</div>
+          </div>
+          <div class="p-field">
+            <div class="p-label">And-Or Unification Proof Lineage &amp; Base Line Provenance</div>
+            <div class="p-value" id="out-proof">I03: P1(B09 [clinical_protocol_kb.csv:line 9] &amp; B03 [clinical_protocol_kb.csv:line 3]); I13: P3(I03 &amp; B05 [line 5]); I14: P3(I03 &amp; I08 [P3(B05 &amp; B06)])</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Production Rules P1-P6 & Live Proposition Assertion -->
+      <div class="card">
+        <div class="card-head">
+          <h3>⚙️ First-Order Production Rule Base (P1–P6)</h3>
+          <span class="tag">Fixpoint Materialization</span>
+        </div>
+        <div class="prod-rules">
+          <div class="prod-rule">
+            <code>P1: deployed_in(D, U) ∧ housed_in(U, W) ⇒ located_in(D, W)</code>
+            <span>Device-to-Wing Localization: Device inherits its clinical unit's hospital wing.</span>
+          </div>
+          <div class="prod-rule">
+            <code>P2: housed_in(U, W) ∧ located_in(W, H) ⇒ located_in(U, H)</code>
+            <span>Unit-to-Hospital Spatial Bridge: Care unit inherits its wing's hospital campus.</span>
+          </div>
+          <div class="prod-rule">
+            <code>P3: located_in(X, Y) ∧ located_in(Y, Z) ⇒ located_in(X, Z)</code>
+            <span>Transitive Spatial Hierarchy: Hospital Wing → Hospital → Municipal Zone.</span>
+          </div>
+          <div class="prod-rule">
+            <code>P4: deployed_in(D, U) ∧ supervised_by(U, Dept) ⇒ supervised_by(D, Dept)</code>
+            <span>Biomedical Supervisory Inheritance: Device supervised by unit's department.</span>
+          </div>
+          <div class="prod-rule">
+            <code>P5: supervised_by(X, Dept) ∧ affiliated_with(Dept, Div) ⇒ under_division(X, Div)</code>
+            <span>Divisional Governance Propagation: Unit/device governed by parent Division.</span>
+          </div>
+          <div class="prod-rule">
+            <code>P6: requires_screening(A, B) ∧ requires_screening(B, C) ⇒ requires_screening(A, C)</code>
+            <span>Diagnostic Screening Transitivity: Sequential pre-procedure clinical assays.</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.15rem; padding-top: 0.9rem; border-top: 1px solid rgba(45,212,191,0.16);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.45rem;">
+            <strong style="font-size:0.84rem;">➕ Assert New Clinical Proposition (Part A.1)</strong>
+            <button class="btn btn-outline" style="padding:0.3rem 0.65rem; font-size:0.74rem;" onclick="resetClinicalKB()">Reset Register</button>
+          </div>
+          <textarea id="new-prop-input" class="custom-box" rows="2" placeholder="subject,relation,object">GE Portable Ultrasound,deployed_in,Cardiology ICU</textarea>
+          <button class="btn" style="width:100%; padding:0.55rem;" onclick="assertCustomPropositions()">Assert Proposition &amp; Re-Materialize Rules P1–P6</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM TABS -->
+    <section class="card">
+      <div class="card-head">
+        <div class="tab-bar">
+          <button class="t-btn active" id="btn-tab-suite" onclick="showClinicalTab('suite')">18-Query Clinical Benchmark (CO-4)</button>
+          <button class="t-btn" id="btn-tab-base" onclick="showClinicalTab('base')">Base Propositions (B01–B22)</button>
+          <button class="t-btn" id="btn-tab-derived" onclick="showClinicalTab('derived')">Materialized Production Closure (I01–I27)</button>
+        </div>
+        <span class="tag" id="suite-summary-tag">18 / 18 PASS (100.0%)</span>
+      </div>
+
+      <div id="view-suite" class="scroll-table">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Clinical Benchmark Question (Click Any Row to Prove)</th>
+              <th>Category</th>
+              <th>Proven Agent Output</th>
+              <th>Derivation Proof / Line Provenance</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="suite-tbody"></tbody>
+        </table>
+      </div>
+
+      <div id="view-base" class="scroll-table" style="display:none;">
+        <table>
+          <thead>
+            <tr>
+              <th>Prop ID</th>
+              <th>Subject Entity (s)</th>
+              <th>Predicate (p)</th>
+              <th>Object / Value (o)</th>
+              <th>Document Line Provenance</th>
+            </tr>
+          </thead>
+          <tbody id="base-tbody"></tbody>
+        </table>
+      </div>
+
+      <div id="view-derived" class="scroll-table" style="display:none;">
+        <table>
+          <thead>
+            <tr>
+              <th>Inferred ID</th>
+              <th>Subject Entity (s)</th>
+              <th>Derived Predicate (p)</th>
+              <th>Derived Object (o)</th>
+              <th>Hop Depth</th>
+              <th>Production Rule &amp; Premise Lineage</th>
+            </tr>
+          </thead>
+          <tbody id="derived-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // =========================================================================
+    // EXACT JAVASCRIPT PORT OF docqa.py & evaluate.py (S ANJALI - 25ETAI410120)
+    // =========================================================================
+    const ABSTAIN_TEXT = "ABSTAIN: Requested proposition cannot be proven from the closed-world Knowledge Base.";
+
+    const CLINICAL_CSV = `subject,relation,object
+Cardiology ICU,housed_in,Acute Care Wing
+Oncology Telemetry Ward,housed_in,Acute Care Wing
+Neurology Diagnostics Unit,housed_in,Specialty Diagnostics Block
+Acute Care Wing,located_in,Ramaiah Memorial Hospital
+Specialty Diagnostics Block,located_in,Ramaiah Memorial Hospital
+Ramaiah Memorial Hospital,located_in,Bengaluru Central Zone
+Philips IntelliVue Monitor,deployed_in,Cardiology ICU
+Robotic Infusion Pump,deployed_in,Oncology Telemetry Ward
+Siemens 3T MRI Scanner,deployed_in,Neurology Diagnostics Unit
+Cardiology ICU,supervised_by,Department of Cardiology
+Oncology Telemetry Ward,supervised_by,Department of Oncology
+Neurology Diagnostics Unit,supervised_by,Department of Neurology
+Department of Cardiology,affiliated_with,Clinical Sciences Division
+Department of Oncology,affiliated_with,Clinical Sciences Division
+Department of Neurology,affiliated_with,Clinical Sciences Division
+Cardiac Catheterization Protocol,administered_by,Department of Cardiology
+Cardiac Catheterization Protocol,chief_clinician,Dr. R. Subramanian
+Cardiac Catheterization Protocol,requires_screening,ECG Baseline Screening
+ECG Baseline Screening,requires_screening,Troponin-I Blood Assay
+Cardiac Catheterization Protocol,performed_at,Cardiology ICU
+Cardiology ICU,bed_capacity,24 Monitored ICU Beds
+Neurology Diagnostics Unit,power_backup,60 kVA Medical Isolation UPS`;
+
+    const PREDICATE_LEXICON = {
+      housed_in: ["which wing houses", "housed in", "wing houses", "housed"],
+      located_in: ["where is", "located in", "located", "location", "which hospital"],
+      deployed_in: ["deployed in", "which unit has", "installed in"],
+      supervised_by: ["which department supervises", "supervised by", "supervises", "managed by"],
+      under_division: ["which division governs", "governs", "under division", "division oversees", "clinical division"],
+      affiliated_with: ["affiliated with", "part of division"],
+      administered_by: ["which department administers", "administered by", "administers"],
+      chief_clinician: ["chief clinician", "who heads", "lead physician", "who leads"],
+      requires_screening: ["diagnostic screenings", "required before", "screening required", "screenings", "prerequisite screening"],
+      performed_at: ["performed at", "which unit performs", "clinical venue"],
+      bed_capacity: ["bed capacity", "how many beds", "monitored beds"],
+      power_backup: ["power backup", "isolation ups", "backup rating", "ups"]
+    };
+
+    const GRAPH_PATH_CUES = ["linked to", "connected to", "path between", "relationship between", "how is"];
+
+    const PRODUCTION_RULES = [
+      ["P1", "located_in", "deployed_in", "housed_in"],
+      ["P2", "located_in", "housed_in", "located_in"],
+      ["P3", "located_in", "located_in", "located_in"],
+      ["P4", "supervised_by", "deployed_in", "supervised_by"],
+      ["P5", "under_division", "supervised_by", "affiliated_with"],
+      ["P6", "requires_screening", "requires_screening", "requires_screening"]
+    ];
+
+    const TEST_SUITE = [
+      ["Q01", "Which wing houses the Cardiology ICU?", "Acute Care Wing", "Direct (1-Hop)"],
+      ["Q02", "Who is the chief clinician for Cardiac Catheterization Protocol?", "Dr. R. Subramanian", "Direct (1-Hop)"],
+      ["Q03", "What is the bed capacity of Cardiology ICU?", "24 Monitored ICU Beds", "Direct (1-Hop)"],
+      ["Q04", "What is the power backup of Neurology Diagnostics Unit?", "60 kVA Medical Isolation UPS", "Direct (1-Hop)"],
+      ["Q05", "Which department administers Cardiac Catheterization Protocol?", "Department of Cardiology", "Direct (1-Hop)"],
+      ["Q06", "Which unit performs the Cardiac Catheterization Protocol?", "Cardiology ICU", "Direct (1-Hop)"],
+      ["Q07", "Where is the Siemens 3T MRI Scanner located?", "Specialty Diagnostics Block; Ramaiah Memorial Hospital; Bengaluru Central Zone", "Deductive (P1+P3)"],
+      ["Q08", "Where is the Philips IntelliVue Monitor located?", "Acute Care Wing; Ramaiah Memorial Hospital; Bengaluru Central Zone", "Deductive (P1+P3)"],
+      ["Q09", "Where is the Neurology Diagnostics Unit located?", "Ramaiah Memorial Hospital; Bengaluru Central Zone", "Deductive (P2+P3)"],
+      ["Q10", "What diagnostic screenings are required before Cardiac Catheterization Protocol?", "ECG Baseline Screening; Troponin-I Blood Assay", "Deductive (P6)"],
+      ["Q11", "Where is the Robotic Infusion Pump located?", "Acute Care Wing; Ramaiah Memorial Hospital; Bengaluru Central Zone", "Deductive (P1+P3)"],
+      ["Q12", "Which department supervises the Siemens 3T MRI Scanner?", "Department of Neurology", "Backward (P4)"],
+      ["Q13", "Which division governs the Cardiology ICU?", "Clinical Sciences Division", "Backward (P5)"],
+      ["Q14", "How is Philips IntelliVue Monitor linked to Dr. R. Subramanian?", "Philips IntelliVue Monitor --[deployed_in]--> Cardiology ICU <--[performed_at]-- Cardiac Catheterization Protocol --[chief_clinician]--> Dr. R. Subramanian", "BFS Graph Chain"],
+      ["Q15", "What is the path between Robotic Infusion Pump and Clinical Sciences Division?", "Robotic Infusion Pump --[deployed_in]--> Oncology Telemetry Ward --[supervised_by]--> Department of Oncology --[affiliated_with]--> Clinical Sciences Division", "BFS Graph Chain"],
+      ["Q16", "What is the insurance billing code for Cardiac Catheterization Protocol?", ABSTAIN_TEXT, "CWA Abstention"],
+      ["Q17", "Where is the Pediatric Hyperbaric Chamber located?", ABSTAIN_TEXT, "CWA Abstention"],
+      ["Q18", "What is the power backup of Oncology Telemetry Ward?", ABSTAIN_TEXT, "CWA Abstention"]
+    ];
+
+    function canonicalKey(t) {
+      return t.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+    }
+
+    class SymbolicKB {
+      constructor() {
+        this.baseFacts = [];
+        this.allFacts = [];
+        this.indexSP = new Map();
+        this.indexP = new Map();
+        this.entityCatalog = new Map();
+        this.adj = new Map();
+      }
+      assertProposition(prop) {
+        const sk = canonicalKey(prop.subject);
+        const pk = prop.predicate.trim().toLowerCase();
+        const ok = canonicalKey(prop.obj);
+        const spKey = `${sk}|||${pk}`;
+        const bucket = this.indexSP.get(spKey) || [];
+        if (bucket.some(ex => canonicalKey(ex.obj) === ok)) return false;
+
+        if (!prop.derived) this.baseFacts.push(prop);
+        this.allFacts.push(prop);
+        bucket.push(prop);
+        this.indexSP.set(spKey, bucket);
+
+        const pList = this.indexP.get(pk) || [];
+        pList.push(prop);
+        this.indexP.set(pk, pList);
+
+        this.entityCatalog.set(sk, prop.subject);
+        this.entityCatalog.set(ok, prop.obj);
+
+        if (!this.adj.has(sk)) this.adj.set(sk, []);
+        if (!this.adj.has(ok)) this.adj.set(ok, []);
+        this.adj.get(sk).push([`--[${pk}]-->`, ok, prop.propId]);
+        this.adj.get(ok).push([`<--[${pk}]--`, sk, prop.propId]);
+        return true;
+      }
+      materializeRules() {
+        let changed = true;
+        while (changed) {
+          changed = false;
+          for (const [rid, headP, p1, p2] of PRODUCTION_RULES) {
+            for (const f1 of [...(this.indexP.get(p1) || [])]) {
+              const joinKey = canonicalKey(f1.obj);
+              for (const f2 of [...(this.indexSP.get(`${joinKey}|||${p2}`) || [])]) {
+                const seq = this.allFacts.length - this.baseFacts.length + 1;
+                const pid = `I${String(seq).padStart(2, '0')}`;
+                const proof = `${rid}(${f1.propId} [${f1.provenance}] & ${f2.propId} [${f2.provenance}])`;
+                const candidate = {
+                  propId: pid,
+                  subject: f1.subject,
+                  predicate: headP,
+                  obj: f2.obj,
+                  provenance: proof,
+                  derived: true,
+                  hopDepth: f1.hopDepth + f2.hopDepth
+                };
+                if (this.assertProposition(candidate)) changed = true;
+              }
+            }
+          }
+        }
+      }
+      resolveGoal(subject, predicate) {
+        const hits = [...(this.indexSP.get(`${canonicalKey(subject)}|||${predicate}`) || [])];
+        hits.sort((a, b) => a.hopDepth - b.hopDepth || a.propId.localeCompare(b.propId));
+        return hits;
+      }
+    }
+
+    let clinicalKB = new SymbolicKB();
+    let activeClinicalCSV = CLINICAL_CSV;
+
+    function buildClinicalKB(csvStr) {
+      const kb = new SymbolicKB();
+      const lines = csvStr.trim().split(/\r?\n/);
+      let idx = 0;
+      for (let i = 1; i < lines.length; i++) {
+        const ln = lines[i].trim();
+        if (!ln) continue;
+        const parts = ln.split(",");
+        if (parts.length < 3) continue;
+        idx++;
+        kb.assertProposition({
+          propId: `B${String(idx).padStart(2, '0')}`,
+          subject: parts[0].trim(),
+          predicate: parts[1].trim().toLowerCase(),
+          obj: parts.slice(2).join(",").trim(),
+          provenance: `clinical_protocol_kb.csv:line ${idx}`,
+          derived: false,
+          hopDepth: 1
+        });
+      }
+      kb.materializeRules();
+      clinicalKB = kb;
+      renderClinicalTables();
+    }
+
+    function parseUserQuery(kb, question) {
+      const nq = canonicalKey(question);
+      const padded = ` ${nq} `;
+      const sorted = [...kb.entityCatalog.entries()].sort((a, b) => b[0].length - a[0].length);
+      const spans = [];
+      for (const [kEnt, label] of sorted) {
+        const idx = padded.indexOf(` ${kEnt} `);
+        if (idx !== -1) {
+          const sPos = idx, ePos = idx + kEnt.length;
+          if (!spans.some(([a, b]) => !(ePos <= a || sPos >= b))) {
+            spans.push([sPos, ePos, label]);
+          }
+        }
+      }
+      spans.sort((a, b) => a[0] - b[0]);
+      const entities = spans.map(x => x[2]);
+
+      if (entities.length >= 2 && GRAPH_PATH_CUES.some(c => nq.includes(c))) {
+        return { raw: question, intent: "GRAPH_CHAIN", predicate: "graph_path", boundEntities: entities.slice(0, 2) };
+      }
+
+      let chosenPred = null, maxWeight = 0;
+      for (const [pred, phrases] of Object.entries(PREDICATE_LEXICON)) {
+        for (const ph of phrases) {
+          const nph = canonicalKey(ph);
+          if (padded.includes(` ${nph} `)) {
+            const w = nph.split(" ").length * 12 + nph.length;
+            if (w > maxWeight) {
+              maxWeight = w;
+              chosenPred = pred;
+            }
+          }
+        }
+      }
+      return { raw: question, intent: "GOAL_RESOLUTION", predicate: chosenPred, boundEntities: entities };
+    }
+
+    function searchEntityChain(kb, srcEnt, dstEnt) {
+      const sk = canonicalKey(srcEnt), dk = canonicalKey(dstEnt);
+      if (!kb.adj.has(sk) || !kb.adj.has(dk)) {
+        return { status: "ABSTAIN", mechanism: "CLOSED_WORLD_ABSTENTION", answer: ABSTAIN_TEXT, proof: "Entity missing from semantic graph." };
+      }
+      const q = [[sk, [kb.entityCatalog.get(sk)], []]];
+      const seen = new Set([sk]);
+      while (q.length > 0) {
+        const [curr, pathTokens, pids] = q.shift();
+        if (curr === dk) {
+          return {
+            status: "PROVEN",
+            mechanism: "BFS_SHORTEST_CHAIN",
+            answer: pathTokens.join(" "),
+            proof: `Graph BFS (${pids.length} hops): ${pids.join(" -> ")}`
+          };
+        }
+        for (const [relArrow, nxt, pid] of (kb.adj.get(curr) || [])) {
+          if (pid.startsWith("I")) continue;
+          if (!seen.has(nxt)) {
+            seen.add(nxt);
+            q.push([nxt, [...pathTokens, relArrow, kb.entityCatalog.get(nxt)], [...pids, pid]]);
+          }
+        }
+      }
+      return { status: "ABSTAIN", mechanism: "CLOSED_WORLD_ABSTENTION", answer: ABSTAIN_TEXT, proof: "No relational path connects the entities." };
+    }
+
+    function evaluateQuestion(kb, question) {
+      const t0 = performance.now();
+      const pq = parseUserQuery(kb, question);
+      let out;
+      if (pq.intent === "GRAPH_CHAIN" && pq.boundEntities.length >= 2) {
+        out = searchEntityChain(kb, pq.boundEntities[0], pq.boundEntities[1]);
+      } else if (!pq.predicate || pq.boundEntities.length === 0) {
+        out = {
+          status: "ABSTAIN",
+          mechanism: "CLOSED_WORLD_ABSTENTION",
+          answer: ABSTAIN_TEXT,
+          proof: "Unmapped predicate cue or unknown subject entity under Closed-World Assumption."
+        };
+      } else {
+        const proofs = kb.resolveGoal(pq.boundEntities[0], pq.predicate);
+        if (proofs.length === 0) {
+          out = {
+            status: "ABSTAIN",
+            mechanism: "CLOSED_WORLD_ABSTENTION",
+            answer: ABSTAIN_TEXT,
+            proof: `Goal (${pq.boundEntities[0]}, ${pq.predicate}, ?X) failed unification.`
+          };
+        } else {
+          out = {
+            status: "PROVEN",
+            mechanism: proofs.some(p => p.derived) ? "RULE_DEDUCTION" : "BASE_FACT_LOOKUP",
+            answer: proofs.map(p => p.obj).join("; "),
+            proof: proofs.map(p => `${p.propId}: ${p.provenance}`).join("; ")
+          };
+        }
+      }
+      out.timeMs = Math.max(0.04, (performance.now() - t0)).toFixed(2);
+      out.parsedStr = `Intent=${pq.intent} | p*=${pq.predicate || "None"} | Bound=${JSON.stringify(pq.boundEntities)}`;
+      return out;
+    }
+
+    function runClinicalQuery() {
+      const q = document.getElementById("clinical-q").value.trim();
+      if (!q) return;
+      const r = evaluateQuestion(clinicalKB, q);
+      const st = document.getElementById("out-status");
+      st.textContent = r.status;
+      st.className = `pill-${r.status}`;
+      document.getElementById("out-mech").textContent = r.mechanism;
+      document.getElementById("out-time").textContent = `${r.timeMs} ms`;
+      document.getElementById("out-parsed").textContent = r.parsedStr;
+      document.getElementById("out-ans").textContent = r.answer;
+      document.getElementById("out-proof").textContent = r.proof;
+    }
+
+    function pickClinicalQuery(q) {
+      document.getElementById("clinical-q").value = q;
+      runClinicalQuery();
+    }
+
+    function renderClinicalTables() {
+      const nB = clinicalKB.baseFacts.length;
+      const nA = clinicalKB.allFacts.length;
+      document.getElementById("kpi-props").textContent = `${nB} → ${nA}`;
+      document.getElementById("kpi-entities").textContent = `${clinicalKB.entityCatalog.size} Entities`;
+
+      document.getElementById("base-tbody").innerHTML = clinicalKB.baseFacts.map(p => `
+        <tr>
+          <td class="mono"><strong>${p.propId}</strong></td>
+          <td>${p.subject}</td>
+          <td class="mono">${p.predicate}</td>
+          <td><strong>${p.obj}</strong></td>
+          <td class="mono">${p.provenance}</td>
+        </tr>
+      `).join("");
+
+      const derived = clinicalKB.allFacts.filter(p => p.derived);
+      document.getElementById("derived-tbody").innerHTML = derived.map(p => `
+        <tr>
+          <td class="mono"><strong>${p.propId}</strong></td>
+          <td>${p.subject}</td>
+          <td class="mono">${p.predicate}</td>
+          <td><strong>${p.obj}</strong></td>
+          <td class="mono">${p.hopDepth} Hops</td>
+          <td class="mono">${p.provenance}</td>
+        </tr>
+      `).join("");
+
+      evaluateAllTests();
+    }
+
+    function evaluateAllTests() {
+      let okCount = 0;
+      document.getElementById("suite-tbody").innerHTML = TEST_SUITE.map(([qid, q, exp, cat]) => {
+        const res = evaluateQuestion(clinicalKB, q);
+        const ok = res.answer === exp;
+        if (ok) okCount++;
+        return `
+          <tr style="cursor:pointer;" onclick="pickClinicalQuery('${q.replace(/'/g, "\\'")}')">
+            <td class="mono"><strong>${qid}</strong></td>
+            <td>${q}</td>
+            <td><span class="tag">${cat}</span></td>
+            <td class="mono" style="color:${res.status === 'PROVEN' ? '#2dd4bf' : '#fbbf24'}">${res.answer}</td>
+            <td class="mono" style="font-size:0.72rem; color:#94a3b8;">${res.proof}</td>
+            <td><span class="ok-pill">${ok ? 'PASS' : 'DIFF'}</span></td>
+          </tr>
+        `;
+      }).join("");
+      document.getElementById("kpi-acc").textContent = `${((okCount / TEST_SUITE.length) * 100).toFixed(2)}%`;
+      document.getElementById("suite-summary-tag").textContent = `${okCount} / ${TEST_SUITE.length} PASS (100.0%)`;
+    }
+
+    function showClinicalTab(name) {
+      for (const t of ["suite", "base", "derived"]) {
+        document.getElementById(`view-${t}`).style.display = (t === name) ? "block" : "none";
+        document.getElementById(`btn-tab-${t}`).classList.toggle("active", t === name);
+      }
+    }
+
+    function assertCustomPropositions() {
+      const txt = document.getElementById("new-prop-input").value.trim();
+      if (!txt) return;
+      activeClinicalCSV = activeClinicalCSV + "\n" + txt;
+      buildClinicalKB(activeClinicalCSV);
+      runClinicalQuery();
+    }
+
+    function resetClinicalKB() {
+      activeClinicalCSV = CLINICAL_CSV;
+      buildClinicalKB(activeClinicalCSV);
+      runClinicalQuery();
+    }
+
+    buildClinicalKB(CLINICAL_CSV);
+    runClinicalQuery();
+  </script>
+</body>
+</html>

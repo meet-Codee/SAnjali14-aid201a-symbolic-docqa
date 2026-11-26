@@ -1,0 +1,23 @@
+subject,relation,object
+Cardiology ICU,housed_in,Acute Care Wing
+Oncology Telemetry Ward,housed_in,Acute Care Wing
+Neurology Diagnostics Unit,housed_in,Specialty Diagnostics Block
+Acute Care Wing,located_in,Ramaiah Memorial Hospital
+Specialty Diagnostics Block,located_in,Ramaiah Memorial Hospital
+Ramaiah Memorial Hospital,located_in,Bengaluru Central Zone
+Philips IntelliVue Monitor,deployed_in,Cardiology ICU
+Robotic Infusion Pump,deployed_in,Oncology Telemetry Ward
+Siemens 3T MRI Scanner,deployed_in,Neurology Diagnostics Unit
+Cardiology ICU,supervised_by,Department of Cardiology
+Oncology Telemetry Ward,supervised_by,Department of Oncology
+Neurology Diagnostics Unit,supervised_by,Department of Neurology
+Department of Cardiology,affiliated_with,Clinical Sciences Division
+Department of Oncology,affiliated_with,Clinical Sciences Division
+Department of Neurology,affiliated_with,Clinical Sciences Division
+Cardiac Catheterization Protocol,administered_by,Department of Cardiology
+Cardiac Catheterization Protocol,chief_clinician,Dr. R. Subramanian
+Cardiac Catheterization Protocol,requires_screening,ECG Baseline Screening
+ECG Baseline Screening,requires_screening,Troponin-I Blood Assay
+Cardiac Catheterization Protocol,performed_at,Cardiology ICU
+Cardiology ICU,bed_capacity,24 Monitored ICU Beds
+Neurology Diagnostics Unit,power_backup,60 kVA Medical Isolation UPS
