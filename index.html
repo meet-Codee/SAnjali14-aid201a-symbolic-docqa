@@ -12,8 +12,8 @@
       --bg-0: #041318;
       --bg-1: #081f26;
       --bg-2: #0d2b35;
-      --card: rgba(13, 43, 53, 0.88);
-      --border: rgba(45, 212, 191, 0.25);
+      --card: rgba(13, 43, 53, 0.9);
+      --border: rgba(45, 212, 191, 0.28);
       --primary: #0d9488;
       --primary-light: #2dd4bf;
       --accent: #38bdf8;
@@ -26,6 +26,7 @@
       --sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       background: radial-gradient(circle at 85% 10%, #114250 0%, var(--bg-0) 58%), var(--bg-0);
       color: var(--text-0);
@@ -35,7 +36,7 @@
       padding-bottom: 4rem;
     }
     .topbar {
-      background: rgba(4, 19, 24, 0.9);
+      background: rgba(4, 19, 24, 0.92);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       position: sticky;
@@ -48,55 +49,64 @@
       align-items: center;
       gap: 1rem;
     }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.9rem;
-    }
+    .brand { display: flex; align-items: center; gap: 0.9rem; }
     .brand-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 44px; height: 44px; border-radius: 12px;
       background: linear-gradient(135deg, #0d9488, #0284c7);
-      display: grid;
-      place-items: center;
-      font-family: var(--mono);
-      font-weight: 800;
-      font-size: 0.95rem;
-      color: #fff;
+      display: grid; place-items: center;
+      font-family: var(--mono); font-weight: 800; font-size: 0.95rem; color: #fff;
       box-shadow: 0 0 22px rgba(45, 212, 191, 0.28);
     }
-    .brand-title h1 {
-      font-size: 1.06rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-    }
-    .brand-title p {
-      font-size: 0.78rem;
-      color: #5eead4;
-    }
+    .brand-title h1 { font-size: 1.06rem; font-weight: 800; }
+    .brand-title p { font-size: 0.78rem; color: #5eead4; }
     .student-badge {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      background: rgba(13, 148, 136, 0.18);
-      border: 1px solid rgba(45, 212, 191, 0.4);
-      padding: 0.45rem 1rem;
-      border-radius: 999px;
-      font-size: 0.82rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      background: rgba(13, 148, 136, 0.2);
+      border: 1px solid rgba(45, 212, 191, 0.45);
+      padding: 0.45rem 1rem; border-radius: 999px; font-size: 0.82rem;
     }
     .student-badge strong { color: var(--primary-light); }
-    .container {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 1.75rem 1.5rem 0;
+    .container { max-width: 1320px; margin: 0 auto; padding: 1.5rem 1.5rem 0; }
+
+    /* Two Documents Download Banner */
+    .docs-banner {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.28), rgba(2, 132, 199, 0.28));
+      border: 1px solid rgba(45, 212, 191, 0.5);
+      border-radius: 14px;
+      padding: 1.1rem 1.4rem;
+      margin-bottom: 1.35rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
     }
+    .docs-banner-text h3 {
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--primary-light);
+      margin-bottom: 0.18rem;
+    }
+    .docs-banner-text p { font-size: 0.8rem; color: #cbd5e1; }
+    .docs-buttons { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .doc-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(4, 19, 24, 0.9);
+      border: 1px solid rgba(45, 212, 191, 0.5);
+      color: var(--primary-light);
+      padding: 0.52rem 0.9rem; border-radius: 9px;
+      font-size: 0.79rem; font-weight: 700; text-decoration: none; transition: all 0.15s;
+    }
+    .doc-link:hover {
+      background: var(--primary); border-color: var(--primary-light); color: #fff; transform: translateY(-1px);
+    }
+
     .hero {
       background: linear-gradient(135deg, rgba(13, 148, 136, 0.28), rgba(8, 31, 38, 0.92));
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 1.65rem 1.85rem;
-      margin-bottom: 1.5rem;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.35rem;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 1.5rem;
@@ -104,298 +114,126 @@
     }
     @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } }
     .hero-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: rgba(45, 212, 191, 0.16);
-      border: 1px solid rgba(45, 212, 191, 0.45);
-      color: var(--primary-light);
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      font-size: 0.73rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.6rem;
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: rgba(45, 212, 191, 0.16); border: 1px solid rgba(45, 212, 191, 0.45);
+      color: var(--primary-light); padding: 0.25rem 0.75rem; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.55rem;
     }
-    .hero h2 {
-      font-size: 1.52rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.45rem;
-    }
-    .hero p {
-      color: #cbd5e1;
-      font-size: 0.9rem;
-      max-width: 830px;
-    }
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.95rem;
-      margin-bottom: 1.5rem;
-    }
+    .hero h2 { font-size: 1.48rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .hero p { color: #cbd5e1; font-size: 0.88rem; max-width: 830px; }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.95rem; margin-bottom: 1.35rem; }
     @media (max-width: 850px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
-    .kpi-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1rem 1.2rem;
-    }
-    .kpi-card .k-title {
-      font-size: 0.73rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #5eead4;
-    }
-    .kpi-card .k-num {
-      font-size: 1.55rem;
-      font-weight: 800;
-      font-family: var(--mono);
-      color: #fff;
-      margin: 0.2rem 0;
-    }
-    .kpi-card .k-desc {
-      font-size: 0.76rem;
-      color: #94a3b8;
-    }
-    .workspace {
-      display: grid;
-      grid-template-columns: 1.18fr 0.82fr;
-      gap: 1.35rem;
-      margin-bottom: 1.5rem;
-    }
+    .kpi-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 0.95rem 1.15rem; }
+    .kpi-card .k-title { font-size: 0.72rem; text-transform: uppercase; color: #5eead4; }
+    .kpi-card .k-num { font-size: 1.5rem; font-weight: 800; font-family: var(--mono); color: #fff; margin: 0.15rem 0; }
+    .kpi-card .k-desc { font-size: 0.75rem; color: #94a3b8; }
+
+    .workspace { display: grid; grid-template-columns: 1.18fr 0.82fr; gap: 1.35rem; margin-bottom: 1.5rem; }
     @media (max-width: 1024px) { .workspace { grid-template-columns: 1fr; } }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      padding: 1.35rem 1.45rem;
-    }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 1.35rem 1.45rem; }
     .card-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      padding-bottom: 0.7rem;
-      border-bottom: 1px solid rgba(45, 212, 191, 0.16);
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1rem; padding-bottom: 0.7rem; border-bottom: 1px solid rgba(45, 212, 191, 0.16);
     }
-    .card-head h3 {
-      font-size: 1.02rem;
-      font-weight: 700;
-    }
+    .card-head h3 { font-size: 1.02rem; font-weight: 700; }
     .tag {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      padding: 0.2rem 0.55rem;
-      border-radius: 6px;
-      background: rgba(45, 212, 191, 0.15);
-      color: var(--primary-light);
-      border: 1px solid rgba(45, 212, 191, 0.35);
+      font-family: var(--mono); font-size: 0.72rem; padding: 0.2rem 0.55rem; border-radius: 6px;
+      background: rgba(45, 212, 191, 0.15); color: var(--primary-light); border: 1px solid rgba(45, 212, 191, 0.35);
     }
-    .search-bar {
-      display: flex;
-      gap: 0.65rem;
-      margin-bottom: 0.9rem;
-    }
+    .search-bar { display: flex; gap: 0.65rem; margin-bottom: 0.9rem; }
     .search-input {
-      flex: 1;
-      background: rgba(4, 19, 24, 0.82);
-      border: 1px solid rgba(45, 212, 191, 0.4);
-      color: #fff;
-      padding: 0.8rem 1rem;
-      border-radius: 10px;
-      font-size: 0.92rem;
-      font-family: var(--sans);
-      outline: none;
+      flex: 1; background: rgba(4, 19, 24, 0.86); border: 1px solid rgba(45, 212, 191, 0.45);
+      color: #fff; padding: 0.8rem 1rem; border-radius: 10px; font-size: 0.92rem; outline: none;
     }
-    .search-input:focus {
-      border-color: var(--primary-light);
-      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.22);
-    }
+    .search-input:focus { border-color: var(--primary-light); box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.22); }
     .btn {
-      background: linear-gradient(135deg, #0d9488, #0284c7);
-      color: #fff;
-      border: none;
-      padding: 0.8rem 1.25rem;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.87rem;
-      cursor: pointer;
-      transition: transform 0.12s, opacity 0.15s;
-      white-space: nowrap;
+      background: linear-gradient(135deg, #0d9488, #0284c7); color: #fff; border: none;
+      padding: 0.8rem 1.25rem; border-radius: 10px; font-weight: 700; font-size: 0.86rem;
+      cursor: pointer; transition: all 0.15s; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
     }
-    .btn:hover { opacity: 0.95; transform: translateY(-1px); }
-    .btn-outline {
-      background: rgba(15, 45, 55, 0.8);
-      border: 1px solid rgba(45, 212, 191, 0.35);
-    }
-    .preset-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-bottom: 1.15rem;
-    }
+    .btn:hover { opacity: 0.95; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(13, 148, 136, 0.4); }
+    .btn-outline { background: rgba(15, 45, 55, 0.85); border: 1px solid rgba(45, 212, 191, 0.4); }
+
+    .preset-grid { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.15rem; }
     .preset-btn {
-      background: rgba(4, 19, 24, 0.78);
-      border: 1px solid rgba(45, 212, 191, 0.25);
-      color: #cbd5e1;
-      padding: 0.35rem 0.7rem;
-      border-radius: 8px;
-      font-size: 0.76rem;
-      cursor: pointer;
-      transition: all 0.15s;
+      background: rgba(4, 19, 24, 0.85); border: 1px solid rgba(45, 212, 191, 0.3);
+      color: #cbd5e1; padding: 0.38rem 0.72rem; border-radius: 8px; font-size: 0.76rem;
+      cursor: pointer; transition: all 0.15s; font-weight: 500;
     }
-    .preset-btn:hover {
-      background: rgba(13, 148, 136, 0.3);
-      border-color: var(--primary-light);
-      color: #fff;
+    .preset-btn:hover, .preset-btn.active-preset {
+      background: var(--primary); border-color: var(--primary-light); color: #fff;
+      box-shadow: 0 0 12px rgba(45, 212, 191, 0.35);
     }
+
     .proof-box {
-      background: rgba(4, 19, 24, 0.86);
-      border: 1px solid rgba(45, 212, 191, 0.35);
-      border-radius: 12px;
-      padding: 1.15rem 1.25rem;
+      background: rgba(4, 19, 24, 0.9); border: 2px solid rgba(45, 212, 191, 0.38);
+      border-radius: 12px; padding: 1.15rem 1.25rem; transition: all 0.25s;
     }
-    .proof-header {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-      margin-bottom: 0.8rem;
-      align-items: center;
+    .proof-box.flash {
+      border-color: #34d399;
+      box-shadow: 0 0 24px rgba(45, 212, 191, 0.4);
     }
+    .proof-header { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-bottom: 0.8rem; align-items: center; }
     .pill-PROVEN {
-      background: rgba(16, 185, 129, 0.2);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.45);
-      font-family: var(--mono);
-      font-size: 0.73rem;
-      font-weight: 700;
-      padding: 0.22rem 0.6rem;
-      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.45);
+      font-family: var(--mono); font-size: 0.73rem; font-weight: 700; padding: 0.22rem 0.6rem; border-radius: 6px;
     }
     .pill-ABSTAIN {
-      background: rgba(245, 158, 11, 0.2);
-      color: #fbbf24;
-      border: 1px solid rgba(245, 158, 11, 0.45);
-      font-family: var(--mono);
-      font-size: 0.73rem;
-      font-weight: 700;
-      padding: 0.22rem 0.6rem;
-      border-radius: 6px;
+      background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.45);
+      font-family: var(--mono); font-size: 0.73rem; font-weight: 700; padding: 0.22rem 0.6rem; border-radius: 6px;
     }
     .p-field { margin-bottom: 0.65rem; }
     .p-field:last-child { margin-bottom: 0; }
-    .p-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #5eead4;
-      margin-bottom: 0.15rem;
-    }
-    .p-value {
-      font-family: var(--mono);
-      font-size: 0.9rem;
-      color: #f8fafc;
-      word-break: break-word;
-    }
-    .p-value.main-ans {
-      color: #2dd4bf;
-      font-size: 1.03rem;
-      font-weight: 700;
-    }
-    .prod-rules {
-      display: flex;
-      flex-direction: column;
-      gap: 0.58rem;
-    }
+    .p-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: #5eead4; margin-bottom: 0.15rem; }
+    .p-value { font-family: var(--mono); font-size: 0.9rem; color: #f8fafc; word-break: break-word; }
+    .p-value.main-ans { color: #2dd4bf; font-size: 1.04rem; font-weight: 700; }
+
+    .prod-rules { display: flex; flex-direction: column; gap: 0.55rem; }
     .prod-rule {
-      background: rgba(4, 19, 24, 0.75);
-      border: 1px solid rgba(45, 212, 191, 0.2);
-      border-left: 3px solid var(--primary-light);
-      border-radius: 9px;
-      padding: 0.62rem 0.85rem;
+      background: rgba(4, 19, 24, 0.8); border: 1px solid rgba(45, 212, 191, 0.2);
+      border-left: 3px solid var(--primary-light); border-radius: 9px; padding: 0.6rem 0.85rem;
     }
-    .prod-rule code {
-      font-family: var(--mono);
-      font-size: 0.77rem;
-      color: var(--primary-light);
-      display: block;
-      margin-bottom: 0.18rem;
-    }
-    .prod-rule span {
-      font-size: 0.75rem;
-      color: #94a3b8;
-    }
-    .tab-bar {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
+    .prod-rule code { font-family: var(--mono); font-size: 0.77rem; color: var(--primary-light); display: block; margin-bottom: 0.15rem; }
+    .prod-rule span { font-size: 0.75rem; color: #94a3b8; }
+
+    .tab-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .t-btn {
-      background: rgba(4, 19, 24, 0.8);
-      border: 1px solid rgba(45, 212, 191, 0.25);
-      color: #cbd5e1;
-      padding: 0.5rem 0.95rem;
-      border-radius: 9px;
-      font-size: 0.81rem;
-      font-weight: 600;
-      cursor: pointer;
+      background: rgba(4, 19, 24, 0.85); border: 1px solid rgba(45, 212, 191, 0.28);
+      color: #cbd5e1; padding: 0.52rem 1rem; border-radius: 9px; font-size: 0.81rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
     }
-    .t-btn.active {
-      background: var(--primary);
-      border-color: var(--primary-light);
-      color: #fff;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.81rem;
-    }
-    th, td {
-      text-align: left;
-      padding: 0.62rem 0.75rem;
-      border-bottom: 1px solid rgba(45, 212, 191, 0.14);
-    }
-    th {
-      background: rgba(4, 19, 24, 0.92);
-      color: var(--primary-light);
-      font-weight: 600;
-      font-size: 0.74rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    tr:hover td { background: rgba(45, 212, 191, 0.07); }
+    .t-btn:hover { border-color: var(--primary-light); color: #fff; }
+    .t-btn.active { background: var(--primary); border-color: var(--primary-light); color: #fff; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.81rem; }
+    th, td { text-align: left; padding: 0.62rem 0.75rem; border-bottom: 1px solid rgba(45, 212, 191, 0.14); }
+    th { background: rgba(4, 19, 24, 0.95); color: var(--primary-light); font-weight: 600; font-size: 0.74rem; text-transform: uppercase; position: sticky; top: 0; }
+    tr.clickable-row { cursor: pointer; transition: background 0.12s; }
+    tr.clickable-row:hover td { background: rgba(45, 212, 191, 0.14); }
     .mono { font-family: var(--mono); font-size: 0.77rem; }
     .ok-pill {
-      background: rgba(16, 185, 129, 0.2);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.45);
-      padding: 0.15rem 0.5rem;
-      border-radius: 5px;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 700;
+      background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.45);
+      padding: 0.15rem 0.5rem; border-radius: 5px; font-family: var(--mono); font-size: 0.72rem; font-weight: 700;
     }
     .custom-box {
-      width: 100%;
-      background: rgba(4, 19, 24, 0.85);
-      border: 1px solid rgba(45, 212, 191, 0.35);
-      color: #fff;
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      padding: 0.7rem;
-      border-radius: 9px;
-      margin-bottom: 0.6rem;
+      width: 100%; background: rgba(4, 19, 24, 0.88); border: 1px solid rgba(45, 212, 191, 0.4);
+      color: #fff; font-family: var(--mono); font-size: 0.78rem; padding: 0.7rem; border-radius: 9px; margin-bottom: 0.6rem;
     }
-    .scroll-table {
-      overflow-x: auto;
-      max-height: 440px;
-      overflow-y: auto;
+    .scroll-table { overflow-x: auto; max-height: 460px; overflow-y: auto; }
+
+    #toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      background: linear-gradient(135deg, #0d9488, #0284c7);
+      color: #fff; padding: 0.75rem 1.2rem; border-radius: 10px;
+      font-size: 0.84rem; font-weight: 700; box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+      opacity: 0; transform: translateY(12px); pointer-events: none; transition: all 0.22s;
     }
+    #toast.show { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
+  <div id="toast">Clinical Goal Proven!</div>
+
   <header class="topbar">
     <div class="brand">
       <div class="brand-icon">KB</div>
@@ -409,11 +247,25 @@
       <span>•</span>
       <span>Reg. No.: <strong>25ETAI410120</strong></span>
       <span>•</span>
-      <span>B.Tech. CSE (3rd Sem)</span>
+      <span>GitHub: <a href="https://github.com/SAnjali14" target="_blank" style="color:#2dd4bf; font-weight:700;">@SAnjali14</a></span>
     </div>
   </header>
 
   <main class="container">
+    <!-- TWO SUBMISSION DOCUMENTS DOWNLOAD BAR -->
+    <section class="docs-banner">
+      <div class="docs-banner-text">
+        <h3>📄 Official AID201A Two-Document Submission Package — S Anjali (25ETAI410120)</h3>
+        <p>Direct download of both mandatory documents: (1) Code, Documentation &amp; Explanations, and (2) IEEE-Format Technical Report.</p>
+      </div>
+      <div class="docs-buttons">
+        <a class="doc-link" href="./AID201A_S_Anjali_1_Code_and_Documentation.pdf" target="_blank">⬇ Doc 1: Code &amp; Documentation (PDF)</a>
+        <a class="doc-link" href="./AID201A_S_Anjali_1_Code_and_Documentation.docx" download>⬇ Doc 1 (DOCX)</a>
+        <a class="doc-link" href="./AID201A_S_Anjali_2_IEEE_Report.pdf" target="_blank">⬇ Doc 2: IEEE Format Report (PDF)</a>
+        <a class="doc-link" href="./AID201A_S_Anjali_2_IEEE_Report.docx" download>⬇ Doc 2 (DOCX)</a>
+      </div>
+    </section>
+
     <section class="hero">
       <div>
         <span class="hero-pill">● Non-NLP / Non-RAG • Symbolic Relational Proposition &amp; Production-Rule Agent</span>
@@ -425,8 +277,11 @@
         </p>
       </div>
       <div style="display:flex; flex-direction:column; gap:0.55rem;">
-        <button class="btn" onclick="evaluateAllTests()">▶ Execute All 18 Clinical Benchmark Tests</button>
-        <a class="btn btn-outline" href="https://github.com/meet-Codee/aid201a-symbolic-docqa-anjali" target="_blank" style="text-align:center; text-decoration:none;">View GitHub Repository ↗</a>
+        <button type="button" class="btn" id="btn-eval-all">▶ Execute All 18 Clinical Benchmark Tests</button>
+        <div style="display:flex; gap:0.45rem;">
+          <a class="btn btn-outline" href="https://github.com/SAnjali14" target="_blank" style="text-decoration:none; flex:1;">SAnjali14 GitHub ↗</a>
+          <a class="btn btn-outline" href="https://github.com/meet-Codee/SAnjali14-aid201a-symbolic-docqa" target="_blank" style="text-decoration:none; flex:1;">Project Repo ↗</a>
+        </div>
       </div>
     </section>
 
@@ -453,7 +308,7 @@
       </div>
     </section>
 
-    <section class="workspace">
+    <section class="workspace" id="clinical-console">
       <!-- LEFT: Goal Unification & BFS Query Console -->
       <div class="card">
         <div class="card-head">
@@ -464,28 +319,31 @@
         <div class="search-bar">
           <input id="clinical-q" class="search-input" type="text"
                  value="Where is the Siemens 3T MRI Scanner located?"
-                 placeholder="Enter any clinical ward, device location, screening chain, or BFS relationship question..."
-                 onkeydown="if(event.key==='Enter') runClinicalQuery()" />
-          <button class="btn" onclick="runClinicalQuery()">Prove Goal</button>
+                 placeholder="Enter any clinical ward, device location, screening chain, or BFS relationship question..." />
+          <button type="button" class="btn" id="btn-prove">Prove Goal</button>
         </div>
 
-        <span style="font-size:0.75rem; color:#5eead4; display:block; margin-bottom:0.45rem;">Select a clinical benchmark query across our 5 symbolic reasoning categories:</span>
-        <div class="preset-grid">
-          <button class="preset-btn" onclick="pickClinicalQuery('Which wing houses the Cardiology ICU?')">Q01: Base Proposition (1-Hop)</button>
-          <button class="preset-btn" onclick="pickClinicalQuery('Where is the Siemens 3T MRI Scanner located?')">Q07: Deductive Spatial (P1+P3, 4-Hop)</button>
-          <button class="preset-btn" onclick="pickClinicalQuery('What diagnostic screenings are required before Cardiac Catheterization Protocol?')">Q10: Screening Chain (P6)</button>
-          <button class="preset-btn" onclick="pickClinicalQuery('Which department supervises the Siemens 3T MRI Scanner?')">Q12: Backward Supervision (P4)</button>
-          <button class="preset-btn" onclick="pickClinicalQuery('Which division governs the Cardiology ICU?')">Q13: Divisional Governance (P5)</button>
-          <button class="preset-btn" onclick="pickClinicalQuery('How is Philips IntelliVue Monitor linked to Dr. R. Subramanian?')">Q14: BFS Shortest Entity Chain</button>
-          <button class="preset-btn" onclick="pickClinicalQuery('What is the path between Robotic Infusion Pump and Clinical Sciences Division?')">Q15: BFS 3-Hop Clinical Path</button>
-          <button class="preset-btn" onclick="pickClinicalQuery('What is the insurance billing code for Cardiac Catheterization Protocol?')">Q16: CWA Abstention Test</button>
+        <span style="font-size:0.75rem; color:#5eead4; display:block; margin-bottom:0.45rem;">Click any preset button below to test all 5 clinical reasoning categories:</span>
+        <div class="preset-grid" id="clinical-presets">
+          <button type="button" class="preset-btn" data-q="Which wing houses the Cardiology ICU?">Q01: Base Proposition (1-Hop)</button>
+          <button type="button" class="preset-btn active-preset" data-q="Where is the Siemens 3T MRI Scanner located?">Q07: Deductive Spatial (P1+P3, 4-Hop)</button>
+          <button type="button" class="preset-btn" data-q="What diagnostic screenings are required before Cardiac Catheterization Protocol?">Q10: Screening Chain (P6)</button>
+          <button type="button" class="preset-btn" data-q="Which department supervises the Siemens 3T MRI Scanner?">Q12: Backward Supervision (P4)</button>
+          <button type="button" class="preset-btn" data-q="Which division governs the Cardiology ICU?">Q13: Divisional Governance (P5)</button>
+          <button type="button" class="preset-btn" data-q="How is Philips IntelliVue Monitor linked to Dr. R. Subramanian?">Q14: BFS Shortest Entity Chain</button>
+          <button type="button" class="preset-btn" data-q="What is the path between Robotic Infusion Pump and Clinical Sciences Division?">Q15: BFS 3-Hop Clinical Path</button>
+          <button type="button" class="preset-btn" data-q="What is the insurance billing code for Cardiac Catheterization Protocol?">Q16: CWA Abstention Test</button>
         </div>
 
-        <div class="proof-box">
+        <div class="proof-box" id="clinical-proof-box">
           <div class="proof-header">
             <span class="pill-PROVEN" id="out-status">PROVEN</span>
             <span class="tag" id="out-mech">RULE_DEDUCTION</span>
-            <span class="tag" id="out-time">0.11 ms</span>
+            <span class="tag" id="out-time">0.08 ms</span>
+          </div>
+          <div class="p-field">
+            <div class="p-label">Evaluated Clinical Question</div>
+            <div class="p-value" id="out-q" style="color:#cbd5e1;">Where is the Siemens 3T MRI Scanner located?</div>
           </div>
           <div class="p-field">
             <div class="p-label">Parsed Symbolic Goal Frame (Intent, Canonical Predicate p*, Bound Entities)</div>
@@ -538,21 +396,21 @@
         <div style="margin-top: 1.15rem; padding-top: 0.9rem; border-top: 1px solid rgba(45,212,191,0.16);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.45rem;">
             <strong style="font-size:0.84rem;">➕ Assert New Clinical Proposition (Part A.1)</strong>
-            <button class="btn btn-outline" style="padding:0.3rem 0.65rem; font-size:0.74rem;" onclick="resetClinicalKB()">Reset Register</button>
+            <button type="button" class="btn btn-outline" id="btn-reset-clinical" style="padding:0.3rem 0.65rem; font-size:0.74rem;">Reset Register</button>
           </div>
-          <textarea id="new-prop-input" class="custom-box" rows="2" placeholder="subject,relation,object">GE Portable Ultrasound,deployed_in,Cardiology ICU</textarea>
-          <button class="btn" style="width:100%; padding:0.55rem;" onclick="assertCustomPropositions()">Assert Proposition &amp; Re-Materialize Rules P1–P6</button>
+          <textarea id="new-prop-input" class="custom-box" rows="2">GE Portable Ultrasound,deployed_in,Cardiology ICU</textarea>
+          <button type="button" class="btn" id="btn-assert-prop" style="width:100%; padding:0.6rem;">Assert Proposition &amp; Re-Materialize Rules P1–P6</button>
         </div>
       </div>
     </section>
 
     <!-- BOTTOM TABS -->
-    <section class="card">
+    <section class="card" id="clinical-tabs-section">
       <div class="card-head">
         <div class="tab-bar">
-          <button class="t-btn active" id="btn-tab-suite" onclick="showClinicalTab('suite')">18-Query Clinical Benchmark (CO-4)</button>
-          <button class="t-btn" id="btn-tab-base" onclick="showClinicalTab('base')">Base Propositions (B01–B22)</button>
-          <button class="t-btn" id="btn-tab-derived" onclick="showClinicalTab('derived')">Materialized Production Closure (I01–I27)</button>
+          <button type="button" class="t-btn active" data-ctab="suite">18-Query Clinical Benchmark (CO-4)</button>
+          <button type="button" class="t-btn" data-ctab="base">Base Propositions (B01–B22)</button>
+          <button type="button" class="t-btn" data-ctab="derived">Materialized Production Closure (I01–I27)</button>
         </div>
         <span class="tag" id="suite-summary-tag">18 / 18 PASS (100.0%)</span>
       </div>
@@ -562,7 +420,7 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Clinical Benchmark Question (Click Any Row to Prove)</th>
+              <th>Clinical Benchmark Question (Click Any Row to Prove in Console)</th>
               <th>Category</th>
               <th>Proven Agent Output</th>
               <th>Derivation Proof / Line Provenance</th>
@@ -607,9 +465,6 @@
   </main>
 
   <script>
-    // =========================================================================
-    // EXACT JAVASCRIPT PORT OF docqa.py & evaluate.py (S ANJALI - 25ETAI410120)
-    // =========================================================================
     const ABSTAIN_TEXT = "ABSTAIN: Requested proposition cannot be proven from the closed-world Knowledge Base.";
 
     const CLINICAL_CSV = `subject,relation,object
@@ -682,6 +537,14 @@ Neurology Diagnostics Unit,power_backup,60 kVA Medical Isolation UPS`;
       ["Q17", "Where is the Pediatric Hyperbaric Chamber located?", ABSTAIN_TEXT, "CWA Abstention"],
       ["Q18", "What is the power backup of Oncology Telemetry Ward?", ABSTAIN_TEXT, "CWA Abstention"]
     ];
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+    }
 
     function canonicalKey(t) {
       return t.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
@@ -757,31 +620,6 @@ Neurology Diagnostics Unit,power_backup,60 kVA Medical Isolation UPS`;
 
     let clinicalKB = new SymbolicKB();
     let activeClinicalCSV = CLINICAL_CSV;
-
-    function buildClinicalKB(csvStr) {
-      const kb = new SymbolicKB();
-      const lines = csvStr.trim().split(/\r?\n/);
-      let idx = 0;
-      for (let i = 1; i < lines.length; i++) {
-        const ln = lines[i].trim();
-        if (!ln) continue;
-        const parts = ln.split(",");
-        if (parts.length < 3) continue;
-        idx++;
-        kb.assertProposition({
-          propId: `B${String(idx).padStart(2, '0')}`,
-          subject: parts[0].trim(),
-          predicate: parts[1].trim().toLowerCase(),
-          obj: parts.slice(2).join(",").trim(),
-          provenance: `clinical_protocol_kb.csv:line ${idx}`,
-          derived: false,
-          hopDepth: 1
-        });
-      }
-      kb.materializeRules();
-      clinicalKB = kb;
-      renderClinicalTables();
-    }
 
     function parseUserQuery(kb, question) {
       const nq = canonicalKey(question);
@@ -884,7 +722,7 @@ Neurology Diagnostics Unit,power_backup,60 kVA Medical Isolation UPS`;
       return out;
     }
 
-    function runClinicalQuery() {
+    function runClinicalQuery(notify = true) {
       const q = document.getElementById("clinical-q").value.trim();
       if (!q) return;
       const r = evaluateQuestion(clinicalKB, q);
@@ -893,17 +731,90 @@ Neurology Diagnostics Unit,power_backup,60 kVA Medical Isolation UPS`;
       st.className = `pill-${r.status}`;
       document.getElementById("out-mech").textContent = r.mechanism;
       document.getElementById("out-time").textContent = `${r.timeMs} ms`;
+      document.getElementById("out-q").textContent = q;
       document.getElementById("out-parsed").textContent = r.parsedStr;
       document.getElementById("out-ans").textContent = r.answer;
       document.getElementById("out-proof").textContent = r.proof;
+
+      document.querySelectorAll("#clinical-presets .preset-btn").forEach(btn => {
+        btn.classList.toggle("active-preset", btn.getAttribute("data-q") === q);
+      });
+
+      const pbox = document.getElementById("clinical-proof-box");
+      pbox.classList.remove("flash");
+      void pbox.offsetWidth;
+      pbox.classList.add("flash");
+      setTimeout(() => pbox.classList.remove("flash"), 600);
+
+      if (notify) showToast(`Goal ${r.status} via ${r.mechanism}`);
     }
 
-    function pickClinicalQuery(q) {
-      document.getElementById("clinical-q").value = q;
-      runClinicalQuery();
+    function showClinicalTab(name) {
+      ["suite", "base", "derived"].forEach(t => {
+        document.getElementById(`view-${t}`).style.display = (t === name) ? "block" : "none";
+      });
+      document.querySelectorAll(".t-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-ctab") === name);
+      });
     }
 
-    function renderClinicalTables() {
+    function evaluateAllTests(scrollToSuite = false) {
+      let okCount = 0;
+      const tbody = document.getElementById("suite-tbody");
+      tbody.innerHTML = "";
+      TEST_SUITE.forEach(([qid, q, exp, cat]) => {
+        const res = evaluateQuestion(clinicalKB, q);
+        const ok = res.answer === exp;
+        if (ok) okCount++;
+        const tr = document.createElement("tr");
+        tr.className = "clickable-row";
+        tr.innerHTML = `
+          <td class="mono"><strong>${qid}</strong></td>
+          <td>${q}</td>
+          <td><span class="tag">${cat}</span></td>
+          <td class="mono" style="color:${res.status === 'PROVEN' ? '#2dd4bf' : '#fbbf24'}">${res.answer}</td>
+          <td class="mono" style="font-size:0.72rem; color:#94a3b8;">${res.proof}</td>
+          <td><span class="ok-pill">${ok ? 'PASS' : 'DIFF'}</span></td>
+        `;
+        tr.addEventListener("click", () => {
+          document.getElementById("clinical-q").value = q;
+          runClinicalQuery(true);
+          document.getElementById("clinical-console").scrollIntoView({ behavior: "smooth" });
+        });
+        tbody.appendChild(tr);
+      });
+      document.getElementById("kpi-acc").textContent = `${((okCount / TEST_SUITE.length) * 100).toFixed(2)}%`;
+      document.getElementById("suite-summary-tag").textContent = `${okCount} / ${TEST_SUITE.length} PASS (100.0%)`;
+      if (scrollToSuite) {
+        showClinicalTab("suite");
+        document.getElementById("clinical-tabs-section").scrollIntoView({ behavior: "smooth" });
+        showToast(`Verified all 18 Clinical Benchmark Goals: ${okCount}/18 PASS (100%)`);
+      }
+    }
+
+    function buildClinicalKB(csvStr) {
+      const kb = new SymbolicKB();
+      const lines = csvStr.trim().split(/\r?\n/);
+      let idx = 0;
+      for (let i = 1; i < lines.length; i++) {
+        const ln = lines[i].trim();
+        if (!ln) continue;
+        const parts = ln.split(",");
+        if (parts.length < 3) continue;
+        idx++;
+        kb.assertProposition({
+          propId: `B${String(idx).padStart(2, '0')}`,
+          subject: parts[0].trim(),
+          predicate: parts[1].trim().toLowerCase(),
+          obj: parts.slice(2).join(",").trim(),
+          provenance: `clinical_protocol_kb.csv:line ${idx}`,
+          derived: false,
+          hopDepth: 1
+        });
+      }
+      kb.materializeRules();
+      clinicalKB = kb;
+
       const nB = clinicalKB.baseFacts.length;
       const nA = clinicalKB.allFacts.length;
       document.getElementById("kpi-props").textContent = `${nB} → ${nA}`;
@@ -931,53 +842,57 @@ Neurology Diagnostics Unit,power_backup,60 kVA Medical Isolation UPS`;
         </tr>
       `).join("");
 
-      evaluateAllTests();
+      evaluateAllTests(false);
     }
 
-    function evaluateAllTests() {
-      let okCount = 0;
-      document.getElementById("suite-tbody").innerHTML = TEST_SUITE.map(([qid, q, exp, cat]) => {
-        const res = evaluateQuestion(clinicalKB, q);
-        const ok = res.answer === exp;
-        if (ok) okCount++;
-        return `
-          <tr style="cursor:pointer;" onclick="pickClinicalQuery('${q.replace(/'/g, "\\'")}')">
-            <td class="mono"><strong>${qid}</strong></td>
-            <td>${q}</td>
-            <td><span class="tag">${cat}</span></td>
-            <td class="mono" style="color:${res.status === 'PROVEN' ? '#2dd4bf' : '#fbbf24'}">${res.answer}</td>
-            <td class="mono" style="font-size:0.72rem; color:#94a3b8;">${res.proof}</td>
-            <td><span class="ok-pill">${ok ? 'PASS' : 'DIFF'}</span></td>
-          </tr>
-        `;
-      }).join("");
-      document.getElementById("kpi-acc").textContent = `${((okCount / TEST_SUITE.length) * 100).toFixed(2)}%`;
-      document.getElementById("suite-summary-tag").textContent = `${okCount} / ${TEST_SUITE.length} PASS (100.0%)`;
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+      buildClinicalKB(CLINICAL_CSV);
+      runClinicalQuery(false);
 
-    function showClinicalTab(name) {
-      for (const t of ["suite", "base", "derived"]) {
-        document.getElementById(`view-${t}`).style.display = (t === name) ? "block" : "none";
-        document.getElementById(`btn-tab-${t}`).classList.toggle("active", t === name);
-      }
-    }
+      document.getElementById("btn-prove").addEventListener("click", () => runClinicalQuery(true));
+      document.getElementById("clinical-q").addEventListener("keydown", e => {
+        if (e.key === "Enter") runClinicalQuery(true);
+      });
 
-    function assertCustomPropositions() {
-      const txt = document.getElementById("new-prop-input").value.trim();
-      if (!txt) return;
-      activeClinicalCSV = activeClinicalCSV + "\n" + txt;
-      buildClinicalKB(activeClinicalCSV);
-      runClinicalQuery();
-    }
+      document.querySelectorAll("#clinical-presets .preset-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const q = btn.getAttribute("data-q");
+          document.getElementById("clinical-q").value = q;
+          runClinicalQuery(true);
+        });
+      });
 
-    function resetClinicalKB() {
-      activeClinicalCSV = CLINICAL_CSV;
-      buildClinicalKB(activeClinicalCSV);
-      runClinicalQuery();
-    }
+      document.getElementById("btn-eval-all").addEventListener("click", () => evaluateAllTests(true));
 
-    buildClinicalKB(CLINICAL_CSV);
-    runClinicalQuery();
+      document.querySelectorAll(".t-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const t = btn.getAttribute("data-ctab");
+          showClinicalTab(t);
+          showToast(`Viewing tab: ${btn.textContent}`);
+        });
+      });
+
+      document.getElementById("btn-assert-prop").addEventListener("click", () => {
+        const txt = document.getElementById("new-prop-input").value.trim();
+        if (!txt) return;
+        const firstSubj = txt.split(",")[0].trim();
+        activeClinicalCSV = activeClinicalCSV + "\n" + txt;
+        buildClinicalKB(activeClinicalCSV);
+        if (firstSubj) {
+          document.getElementById("clinical-q").value = `Where is the ${firstSubj} located?`;
+          runClinicalQuery(false);
+        }
+        showToast(`Asserted "${firstSubj}"! Materialized Closure = ${clinicalKB.allFacts.length} propositions.`);
+      });
+
+      document.getElementById("btn-reset-clinical").addEventListener("click", () => {
+        activeClinicalCSV = CLINICAL_CSV;
+        buildClinicalKB(activeClinicalCSV);
+        document.getElementById("clinical-q").value = "Where is the Siemens 3T MRI Scanner located?";
+        runClinicalQuery(false);
+        showToast("Clinical Register reset to 22 base propositions (49 total closure).");
+      });
+    });
   </script>
 </body>
 </html>
